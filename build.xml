@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="reportingProject">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="reportingProject.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/gnujaxp.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/iText-2.1.5.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/jcommon-1.0.17.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/jfreechart-1.0.14.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/jfreechart-1.0.14-experimental.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/jfreechart-1.0.14-swt.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/junit.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/servlet.jar"/>
+        <pathelement location="../../Master-Recherche-ADEO/ADEO_M2/JEE/Activity_graph/jfreechart-1.0.14/lib/swtgraphics2d.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="reportingProject.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="BarChartDemo1">
+        <java classname="org.jfree.chart.demo.BarChartDemo1" failonerror="true" fork="yes">
+            <classpath refid="reportingProject.classpath"/>
+        </java>
+    </target>
+    <target name="test">
+        <java classname="Test" failonerror="true" fork="yes">
+            <classpath refid="reportingProject.classpath"/>
+        </java>
+    </target>
+</project>
